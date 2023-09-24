@@ -1,0 +1,4 @@
+jupyter
+python-dotenv
+python-telegram-bot
+yfinance
