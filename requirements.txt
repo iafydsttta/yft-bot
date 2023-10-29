@@ -1,4 +1,5 @@
 jupyter
 python-dotenv
 python-telegram-bot
+schedule
 yfinance
