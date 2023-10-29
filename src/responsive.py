@@ -5,7 +5,7 @@ from telegram.ext import (
     filters,
 )
 
-from yft_bot.credentials import TOKEN
+from credentials import TOKEN
 from yft_bot.bot import start, help, track, regular_text
 
 if __name__ == '__main__':

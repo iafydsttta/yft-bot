@@ -4,7 +4,7 @@ import pprint
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from yft_bot.yf_track import basic_info
+from yf_track import basic_info
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
