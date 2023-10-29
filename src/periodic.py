@@ -1,13 +1,12 @@
 import asyncio
 import os
-from pprint import pformat
 import time
+from pprint import pformat
 
 import schedule
-from telegram.ext import ApplicationBuilder, ExtBot
-
-from yf_track import basic_info
 from credentials import TOKEN
+from telegram.ext import ApplicationBuilder, ExtBot
+from yf_track import basic_info
 
 
 async def send_vwce_basic_info() -> None:
@@ -21,7 +20,7 @@ def send_update():
 
 if __name__ == '__main__':
     print("")
-    schedule.every().day.at("16:55", "Europe/Amsterdam").do(send_update)
+    schedule.every().day.at("17:03", "Europe/Amsterdam").do(send_update)
     while True:
         schedule.run_pending()
         time.sleep(10)

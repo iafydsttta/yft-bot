@@ -6,7 +6,7 @@ from telegram.ext import (
 )
 
 from credentials import TOKEN
-from yft_bot.bot import start, help, track, regular_text
+from .bot import start, help, track, regular_text
 
 if __name__ == '__main__':
     app = ApplicationBuilder().token(TOKEN).build()
