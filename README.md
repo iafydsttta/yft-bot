@@ -2,7 +2,7 @@
 
 YFT stands for Yahoo Finance + Telegram.
 
-It's a Telegram bot that uses the [yfinance](https://github.com/ranaroussi/yfinance) library. **NOTE:** yfinance is currently not working, see this github [issue](https://github.com/ranaroussi/yfinance/issues/1729).
+It's a Telegram bot that uses the [yfinance](https://github.com/ranaroussi/yfinance) library.
 
 [Code](./src/bot.py) takes inspiration from this [tutorial](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Extensions---Your-first-Bot).
 
