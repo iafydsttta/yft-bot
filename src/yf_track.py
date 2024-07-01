@@ -15,7 +15,7 @@ def dict_to_markdown(d: dict[str, float]) -> str:
     result = "```\n"
     max_key_len: int = reduce(max, map(len, d.keys()))
     for k, v in d.items():
-        result += f"{k +':':{max_key_len+2}} {v:.1f}\n".replace(".", ",")
+        result += f"{k:{max_key_len+2}} {v:.1f}\n".replace(".", ",")
     result += "```"
     return result
 
@@ -31,14 +31,19 @@ def get_tracker_info(ticker_str: str) -> dict[str, float]:
     # initialize history
     ticker.history()
 
-    selected_keys = (
-        "fiftyDayAverage",
-        "twoHundredDayAverage",
-        "fiftyTwoWeekLow",
-        "fiftyTwoWeekHigh",
-    )
+    keys_as_pretty_names = {
+        "fiftyDayAverage": "50 Day Average",
+        "twoHundredDayAverage": "200 Day Average",
+        "fiftyTwoWeekLow": "52 Week Low",
+        "fiftyTwoWeekHigh": "52 Week High",
+    }
 
-    selected_info = {key: ticker.info[key] for key in selected_keys}
-    selected_info["lastPrice"] = ticker.basic_info["lastPrice"]
+    selected_info = {
+        pretty_name: ticker.info[key]
+        for key, pretty_name in keys_as_pretty_names.items()
+    }
+
+    # Add info from "basic info" as well
+    selected_info["Last Price"] = ticker.basic_info["lastPrice"]
 
     return selected_info

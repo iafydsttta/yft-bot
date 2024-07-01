@@ -13,7 +13,9 @@ async def send_vwce_basic_info() -> None:
     app = ApplicationBuilder().token(TOKEN).build()
     bot: ExtBot = app.bot
     message = dict_to_markdown(get_cached_tracker_info("VWCE.DE"))
+
     print(message)
+
     await bot.send_message(
         chat_id=os.environ["TELEGRAMCHATID"],
         text=message,
