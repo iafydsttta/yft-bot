@@ -2,6 +2,7 @@ import asyncio
 import os
 import time
 
+from httpx import NetworkError
 import schedule
 import telegram
 from credentials import TOKEN
@@ -16,11 +17,14 @@ async def send_vwce_basic_info() -> None:
 
     print(message)
 
-    await bot.send_message(
-        chat_id=os.environ["TELEGRAMCHATID"],
-        text=message,
-        parse_mode=telegram.constants.ParseMode.MARKDOWN_V2,
-    )
+    try:
+        _ = await bot.send_message(
+            chat_id=os.environ["TELEGRAMCHATID"],
+            text=message,
+            parse_mode=telegram.constants.ParseMode.MARKDOWN_V2,
+        )
+    except NetworkError as e:
+        print(f"Could not send message: {e}")
 
 
 def send_update():
