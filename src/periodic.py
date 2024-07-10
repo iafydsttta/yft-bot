@@ -1,10 +1,9 @@
 import asyncio
 import os
-from pathlib import Path
 from datetime import datetime, timedelta
+from pathlib import Path
 import time
 
-import schedule
 import telegram
 from credentials import TOKEN
 from httpx import NetworkError
@@ -14,6 +13,7 @@ from yf_track import dict_to_markdown, get_cached_tracker_info
 CACHE_DIR = Path(os.path.expanduser("~/.cache/yft-bot/"))
 LOG_FILE = CACHE_DIR / "last_message_sent.log"
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+SEND_AFTER_X_DAYS = 4
 
 
 async def send_vwce_basic_info() -> None:
@@ -44,11 +44,6 @@ def send_update():
 
 
 if __name__ == "__main__":
-    # schedule.every().day.at("17:13", "Europe/Amsterdam").do(send_update)
-    # schedule.every().minute.do(send_update)
-    schedule.every(5).seconds.do(send_update)
-    # schedule.every().second.do(send_update)
-
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     if LOG_FILE.exists():
         with open(LOG_FILE, "r") as f:
@@ -57,13 +52,7 @@ if __name__ == "__main__":
         print(f"{last_message_time=}")
         time_since = datetime.now() - last_message_time
         print(f"{time_since=}")
-        if time_since > timedelta(minutes=5):
-            # TODO move to single-run (no scheduling)
-            while True:
-                schedule.run_pending()
-                time.sleep(1)
-    else:
-        # TODO move to single-run (no scheduling)
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
+        if time_since > timedelta(days=SEND_AFTER_X_DAYS):
+            # Give network some time to come online after boot
+            time.sleep(30)
+            send_update()

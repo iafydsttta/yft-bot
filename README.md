@@ -1,5 +1,14 @@
 # YFT Bot
 
+## TOC
+
+- [YFT Bot](#yft-bot)
+  - [TOC](#toc)
+  - [Preparation](#preparation)
+  - [Start a responsive bot](#start-a-responsive-bot)
+  - [Start a bot that sends a message if more than X time has passed](#start-a-bot-that-sends-a-message-if-more-than-x-time-has-passed)
+    - [Run automatically as systemd service after boot](#run-automatically-as-systemd-service-after-boot)
+
 YFT stands for Yahoo Finance + Telegram.
 
 It's a Telegram bot that uses the [yfinance](https://github.com/ranaroussi/yfinance) library.
@@ -17,8 +26,37 @@ It's a Telegram bot that uses the [yfinance](https://github.com/ranaroussi/yfina
 python src/reponsive.py
 ```
 
-## Start a bot that sends scheduled messages
+## Start a bot that sends a message if more than X time has passed
 
 ```python
 python src/periodic.py
+```
+
+### Run automatically as systemd service after boot
+
+Modify 'User' and 'ExecStart' below and save as `/etc/systemd/system/yftbot.service`.
+
+```raw
+[Unit]
+Description=yft-bot sends updates periodically
+After=network.target
+After=systemd-user-sessions.service
+After=network-online.target
+
+[Service]
+User=###
+Type=forking
+ExecStart=/path/to/venv/bin/python /path/to/src/periodic.py
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then run, as root:
+
+```bash
+systemctl start yftbot.service
+systemctl stop yftbot.service
+# Run after boot:
+systemctl enable yftbot.service
 ```
