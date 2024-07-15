@@ -54,5 +54,5 @@ if __name__ == "__main__":
         print(f"{time_since=}")
         if time_since > timedelta(days=SEND_AFTER_X_DAYS):
             # Give network some time to come online after boot
-            time.sleep(30)
+            time.sleep(120)
             send_update()
