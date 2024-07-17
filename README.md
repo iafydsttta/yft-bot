@@ -47,6 +47,7 @@ After=network-online.target
 User=###
 Type=forking
 ExecStart=/path/to/venv/bin/python /path/to/src/periodic.py
+TimeoutSec=500
 
 [Install]
 WantedBy=multi-user.target
