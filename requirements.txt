@@ -1,5 +1,4 @@
 jupyter
 python-dotenv
-python-telegram-bot
-schedule
-yfinance
+python-telegram-bot==20.8
+yfinance==0.2.36

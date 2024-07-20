@@ -38,7 +38,7 @@ Modify 'User' and 'ExecStart' below and save as `/etc/systemd/system/yftbot.serv
 
 ```raw
 [Unit]
-Description=yft-bot sends updates periodically
+Description=Yahoo Finance Telegram Bot
 After=network.target
 After=systemd-user-sessions.service
 After=network-online.target
