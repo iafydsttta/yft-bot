@@ -5,8 +5,8 @@ from telegram.ext import (
     filters,
 )
 
-from credentials import TOKEN
-from .bot import start, help, track, regular_text
+from src.lib.credentials import TOKEN
+from src.lib.bot import start, help, track, regular_text
 
 if __name__ == '__main__':
     app = ApplicationBuilder().token(TOKEN).build()

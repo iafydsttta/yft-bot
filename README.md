@@ -23,13 +23,13 @@ It's a Telegram bot that uses the [yfinance](https://github.com/ranaroussi/yfina
 ## Start a responsive bot
 
 ```python
-python src/reponsive.py
+ python -m src.run_responsive
 ```
 
 ## Start a bot that sends a message if more than X time has passed
 
 ```python
-python src/periodic.py
+ python -m src.run_periodic
 ```
 
 ### Run automatically as systemd service after boot

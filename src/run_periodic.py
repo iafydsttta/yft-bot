@@ -1,18 +1,20 @@
 import asyncio
 import os
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
-import time
 
 import telegram
-from credentials import TOKEN
 from httpx import NetworkError
 from telegram.ext import ApplicationBuilder, ExtBot
-from yf_track import dict_to_markdown, get_cached_tracker_info
+
+from src.lib.credentials import TOKEN
+from src.lib.yf_track import dict_to_markdown, get_cached_tracker_info
 
 CACHE_DIR = Path(os.path.expanduser("~/.cache/yft-bot/"))
-LOG_FILE = CACHE_DIR / "last_message_sent.log"
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+LOG_FILE = CACHE_DIR / "last_message_sent.log"
+NETWORK_DELAY_SECONDS = 120
 SEND_AFTER_X_DAYS = 4
 
 
@@ -54,5 +56,8 @@ if __name__ == "__main__":
         print(f"{time_since=}")
         if time_since > timedelta(days=SEND_AFTER_X_DAYS):
             # Give network some time to come online after boot
-            time.sleep(120)
+            time.sleep(NETWORK_DELAY_SECONDS)
             send_update()
+
+    # print current date/time in local time Amsterdam
+    print(datetime.now().strftime(DATE_FORMAT))
