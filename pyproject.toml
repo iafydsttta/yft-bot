@@ -6,8 +6,9 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "jupyter>=1.1.1",
+    "pydantic~=2.10",
     "python-dotenv>=1.1.0",
-    "python-telegram-bot~=20.8",
+    "python-telegram-bot~=22.0",
     "wat-inspector>=0.4.3",
-    "yfinance~=0.2.36",
+    "yfinance~=0.2.56",
 ]

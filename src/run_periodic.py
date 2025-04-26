@@ -9,7 +9,7 @@ from httpx import NetworkError
 from telegram.ext import ApplicationBuilder, ExtBot
 
 from src.lib.credentials import TOKEN
-from src.lib.yf_track import dict_to_markdown, get_cached_tracker_info
+from src.lib.yahoo_finance.trackers import dict_to_markdown, get_cached_tracker_info
 
 CACHE_DIR = Path(os.path.expanduser("~/.cache/yft-bot/"))
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
